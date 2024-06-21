@@ -35,7 +35,7 @@ export const MakananController = {
                 const files = req.files;
                 media = files.map(file => {
                     const filename = path.basename(file.path);
-                    return `${req.protocol}://${req.get("host")}/media/${filename}`;
+                    return `${req.protocol}://${req.get("host")}/images/${filename}`;
                 });
             }
             
