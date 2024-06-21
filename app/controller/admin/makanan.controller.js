@@ -43,7 +43,7 @@ export const MakananController = {
                 nama_makanan,
                 deskripsi,
                 resep_id: resep.id,
-                kategori_id,
+                kategori_id: 5,
                 media,
                 lokasi,
             }, {transaction});

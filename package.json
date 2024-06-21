@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "dev": "npx nodemon ./bin/www",
-    "build": "tsc",
     "sync": "node syncModels.js"
   },
   "dependencies": {
