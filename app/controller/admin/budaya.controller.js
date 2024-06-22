@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import User from "../../models/user.models.js";
 import Budaya from "../../models/budaya.models.js";
+import { imageUploader } from "../../utils/imagekit.js";
 
 export const BudayaController = {
 
@@ -23,11 +24,18 @@ export const BudayaController = {
             let media = [];
 
             if (req.files) {
-                const files = req.files;
-                media = files.map(file => {
-                    const filename = path.basename(file.path);
-                    return `${req.protocol}://${req.get("host")}/media/${filename}`;
-                });
+                try {
+                    const files = req.files;
+                    for (const file of files) {
+                        const imageUrl = await imageUploader.uploadImagekit(file);
+                        media.push(imageUrl);
+                    }
+                } catch (error) {
+                    logger.error("Error uploading image:", error);
+                    throw new Error('Error uploading image');
+                }
+            } else {
+                throw new Error('No image provided');
             }
 
             const new_budaya = await Budaya.create({

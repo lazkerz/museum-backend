@@ -11,11 +11,6 @@ import { relations } from './app/models/relations.models.js';
 
 const app = express();
 
-// app.use(cors({
-//   origin: 'http://localhost:3000', // Atur origin sesuai dengan domain frontend Anda
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Atur metode HTTP yang diizinkan
-//   allowedHeaders: ['Content-Type', 'Authorization'], // Atur header yang diizinkan
-// }));
 
 app.use(logger('dev'));
 app.use(express.json());
