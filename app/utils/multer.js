@@ -1,8 +1,4 @@
 import multer from 'multer';
-import path from 'path';
-import { config } from '../config/index.js';
-import fs from 'fs';
-import md5 from 'md5';
 
 
 const storage = multer.memoryStorage();

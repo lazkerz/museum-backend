@@ -14,5 +14,6 @@ router.use('/budaya', UserController.getAllBudaya);
 router.use('/detail-budaya/:id', UserController.detailBudaya);
 router.use('/makanan', UserController.getAllMakanan);
 router.use('/detail-makanan/:id', UserController.detailMakanan);
+router.use('/budaya/:kategori', UserController.getBudayabyCategory);
 
 export const routes = router;

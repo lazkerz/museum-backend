@@ -87,6 +87,49 @@ export const BudayaController = {
         }
     },
 
+    async getBudayabyCategory(req, res) {
+        try {
+
+            const admin = await User.findByPk(req.userId);
+
+            if (!admin) {
+                return res.status(403).json({
+                    message: "Require admin role"
+                });
+            }
+            
+            const category = req.params.kategori;
+    
+            if (!category) {
+                return res.status(400).json({
+                    message: "Category is required"
+                });
+            }
+    
+            const budayas = await Budaya.findAll({
+                where: {
+                    kategori_id: category
+                }
+            });
+    
+            if (budayas.length === 0) {
+                return res.status(404).json({
+                    message: "No Budaya found for this category"
+                });
+            }
+    
+            return res.status(200).json({
+                message: "Get Budaya by category successfully",
+                data: budayas
+            });
+        } catch (error) {
+            return res.status(500).json({
+                message: "Internal Server Error",
+                error: error.message
+            });
+        }
+    },    
+
     async updateBudaya(req, res) {
         const transaction = await sequelize.transaction();
         try {

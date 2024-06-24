@@ -48,6 +48,40 @@ export const UserController = {
         }
     },
 
+    async getBudayabyCategory(req, res) {
+        try {
+            const category = req.params.kategori;
+    
+            if (!category) {
+                return res.status(400).json({
+                    message: "Category is required"
+                });
+            }
+    
+            const budayas = await Budaya.findAll({
+                where: {
+                    kategori_id: category
+                }
+            });
+    
+            if (budayas.length === 0) {
+                return res.status(404).json({
+                    message: "No Budaya found for this category"
+                });
+            }
+    
+            return res.status(200).json({
+                message: "Get Budaya by category successfully",
+                data: budayas
+            });
+        } catch (error) {
+            return res.status(500).json({
+                message: "Internal Server Error",
+                error: error.message
+            });
+        }
+    },    
+
     //end feature budaya
     async getAllMakanan(req, res) {
         try {
