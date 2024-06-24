@@ -50,7 +50,7 @@ export const UserController = {
 
     async getBudayabyCategory(req, res) {
         try {
-            const category = req.params.kategori;
+            const category = req.query.kategori;
     
             if (!category) {
                 return res.status(400).json({

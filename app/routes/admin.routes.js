@@ -11,7 +11,7 @@ const adminrouter = Router();
 adminrouter.post("/add-budaya", multipleUploads, AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.createBudaya);
 adminrouter.get("/budaya", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.getAllBudaya);
 adminrouter.put("/update-budaya/:id", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.updateBudaya);
-adminrouter.get("/budaya/:kategori", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.getBudayabyCategory);
+adminrouter.get("/budaya-category", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.getBudayabyCategory);
 //end budaya
 
 //makanan daerah
