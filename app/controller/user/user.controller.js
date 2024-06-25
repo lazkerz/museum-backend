@@ -33,7 +33,8 @@ export const UserController = {
     
             const budaya = await Budaya.findByPk(budaya_id, {
                 include : [{
-                    model: Kategori.name,
+                    model: Kategori.kategori,
+                    as: 'kategori'
                 }]
             });
     
@@ -46,6 +47,7 @@ export const UserController = {
             return res.status(200).json({
                 message: "Budaya updated successfully",
                 data: budaya
+                
             });
     
         } catch (error) {
