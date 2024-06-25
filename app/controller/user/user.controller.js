@@ -36,7 +36,8 @@ export const UserController = {
                     model: Kategori,
                     as: 'kategoris',
                     attributes: ['kategori']
-                }]
+                }],
+                exclude : ['createdAt', 'updatedAt', 'kategori_id']
             });
     
             if (!budaya) {
