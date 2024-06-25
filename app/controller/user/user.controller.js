@@ -34,7 +34,7 @@ export const UserController = {
             const budaya = await Budaya.findByPk(budaya_id, {
                 include : [{
                     model: Kategori,
-                    as: 'kategori',
+                    as: 'kategoris',
                     attributes: ['kategori']
                 }]
             });
