@@ -3,6 +3,7 @@ import User from "../../models/user.models.js";
 import Budaya from "../../models/budaya.models.js";
 import Makanan from "../../models/makanan.model.js";
 import Resep from "../../models/resep.model.js";
+import Kategori from "../../models/kategori.models.js";
 
 
 export const UserController = {
@@ -30,7 +31,11 @@ export const UserController = {
                 });
             }
     
-            const budaya = await Budaya.findByPk(budaya_id);
+            const budaya = await Budaya.findByPk(budaya_id, {
+                include : [{
+                    model: Kategori.name,
+                }]
+            });
     
             if (!budaya) {
                 return res.status(404).json({
@@ -133,7 +138,7 @@ export const UserController = {
             }
 
             return res.status(200).json({
-                message: "Budaya updated successfully",
+                message: "Get Makanan By Id successfully",
                 data: makanan,
             });
     
