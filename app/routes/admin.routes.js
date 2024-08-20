@@ -12,11 +12,13 @@ adminrouter.post("/add-budaya", multipleUploads, AuthMiddleware.verifyToken, Aut
 adminrouter.get("/budaya", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.getAllBudaya);
 adminrouter.put("/update-budaya/:id", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.updateBudaya);
 adminrouter.get("/budaya-category", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.getBudayabyCategory);
+adminrouter.delete("/delete-budaya/:id", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, BudayaController.deleteBudaya);
 //end budaya
 
 //makanan daerah
 adminrouter.post("/add-makanan", multipleUploads, AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, MakananController.createMakanan);
 adminrouter.get("/makanan", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, MakananController.getAllMakanan);
 adminrouter.put("/update-makanan/:id", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, MakananController.updateMakanan);
+adminrouter.delete("/delete-makanan/:id", AuthMiddleware.verifyToken, AuthMiddleware.isAdmin, MakananController.deleteMakanan);
 
 export default adminrouter

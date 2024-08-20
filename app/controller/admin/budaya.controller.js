@@ -175,6 +175,52 @@ export const BudayaController = {
             await transaction.rollback();
             return res.status(500).json({ message: error.message || "Internal Server Error" });
         }
+    },
+
+    async deleteBudaya(req, res){
+        const transaction = await sequelize.transaction();
+        try {
+            const admin = await User.findByPk(req.userId);
+    
+            if (!admin) {
+                return res.status(403).json({
+                    message: "Require admin role"
+                });
+            }
+    
+            const budaya_id = req.params.id;
+    
+            if (!budaya_id) {
+                return res.status(400).json({
+                    message: "Budaya id is required"
+                });
+            }
+    
+            const budaya = await Budaya.findByPk(budaya_id);
+    
+            if (!budaya) {
+                return res.status(404).json({
+                    message: "Budaya not found"
+                });
+            }
+    
+            // Logging the received data
+            // console.log('Received data for update:', req.body);
+    
+            // Update only the provided fields
+            Object.assign(budaya, req.body);
+    
+            await budaya.destroy({ transaction });
+    
+            await transaction.commit();
+            return res.status(200).json({
+                message: "Budaya deleted successfully",
+            });
+    
+        } catch (error) {
+            await transaction.rollback();
+            return res.status(500).json({ message: error.message || "Internal Server Error" });
+        }
     }
     
 }

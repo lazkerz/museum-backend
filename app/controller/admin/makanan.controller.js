@@ -177,6 +177,52 @@ export const MakananController = {
             await transaction.rollback();
             return res.status(500).json({ message: error.message || "Internal Server Error" });
         }
+    },
+
+    async deleteMakanan(req, res){
+        const transaction = await sequelize.transaction();
+        try {
+            const admin = await User.findByPk(req.userId);
+    
+            if (!admin) {
+                return res.status(403).json({
+                    message: "Require admin role"
+                });
+            }
+    
+            const makanan_id = req.params.id;
+    
+            if (!makanan_id) {
+                return res.status(400).json({
+                    message: "Makanan id is required"
+                });
+            }
+    
+            const makanan = await Makanan.findByPk(makanan_id);
+    
+            if (!makanan) {
+                return res.status(404).json({
+                    message: "Makanan not found"
+                });
+            }
+    
+            // Logging the received data
+            // console.log('Received data for update:', req.body);
+    
+            // Update only the provided fields
+            Object.assign(makanan, req.body);
+    
+            await makanan.destroy();
+
+            await transaction.commit();
+            return res.status(200).json({
+                message: "Makanan deleted successfully",
+            });
+    
+        } catch (error) {
+            await transaction.rollback();
+            return res.status(500).json({ message: error.message || "Internal Server Error" });
+        }
     }
     
 }
